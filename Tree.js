@@ -14,7 +14,7 @@ export default class Tree {
         array.sort(function (a, b) {
             return a - b;
         });
-        
+
         // Remove duplicates
         let noDuplicates = [...new Set(array)];
 
@@ -45,6 +45,31 @@ export default class Tree {
         return node;
     }
 
+    insert(key) {
+        this.root = this.insertRec(this.root, key);
+    }
+
+    insertRec(root, key) {
+        /*
+         * If the tree is empty, return a new node
+         */
+        if (root == null) {
+            root = new Node(key);
+            return root;
+        }
+        
+        /* Otherwise, recur down the tree */
+        console.log("key: " + key + " root.key: " + root.value);
+        if (key < root.value) {
+            root.left = this.insertRec(root.left, key);
+        } else if (key > root.value) {
+            root.right = this.insertRec(root.right, key);
+        }
+ 
+        /* return the (unchanged) node pointer */
+        return root;
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
@@ -56,5 +81,9 @@ export default class Tree {
         if (node.left !== null) {
             this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
         }
+    }
+
+    prettyPrintSelf() {
+        this.prettyPrint(this.root);
     }
 }
