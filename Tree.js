@@ -292,6 +292,36 @@ export default class Tree {
         }
     }
 
+    depth(node) {
+        return this.depthRec(this.root, node);
+    }
+
+    depthRec(root, goalNode) {
+        // Base case
+        if (root === null) {
+            return -1;
+        }
+    
+        // Initialize distance as -1
+        var dist = -1;
+    
+        // Check if x is current node=
+        if ((root.value === goalNode.value)|| 
+        
+            // Otherwise, check if x is
+            // present in the left subtree
+            (dist = this.depthRec(root.left, goalNode)) >= 0 || 
+            
+            // Otherwise, check if x is
+            // present in the right subtree
+            (dist = this.depthRec(root.right, goalNode)) >= 0)
+    
+            // Return depth of the node
+            return dist + 1;
+            
+        return dist;
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
