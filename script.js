@@ -13,3 +13,8 @@ tree.delete(8);
 tree.prettyPrintSelf();
 
 console.log(tree.find(4));
+
+console.log(tree.levelOrder());
+tree.levelOrder(function (node) {
+    console.log(node.value);
+});
