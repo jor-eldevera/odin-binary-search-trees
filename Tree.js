@@ -172,7 +172,42 @@ export default class Tree {
             queue.dequeue();
         }
     }
+
+    inOrder(func) {
+        if (func === undefined) {
+            let array = [];
+            this.inOrderWithArray(this.root, array);
+            return array;
+        }
+
+        if (typeof func !== "function") {
+            console.error("inOrder: passed parameter func must be a function");
+            return;
+        }
+
+        this.inOrderWithFunction(this.root, func);
+    }
+
+    inOrderWithArray(node, array) {
+        if (node === null) {
+            return;
+        }
+
+        this.inOrderWithArray(node.left, array);
+        array.push(node.value);
+        this.inOrderWithArray(node.right, array);
+    }
     
+    inOrderWithFunction(node, func) {
+        if (node === null) {
+            return;
+        }
+
+        this.inOrderWithFunction(node.left, func);
+        func(node);
+        this.inOrderWithFunction(node.right, func);
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
