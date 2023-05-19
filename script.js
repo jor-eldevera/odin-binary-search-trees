@@ -42,7 +42,11 @@ tree.postOrder(function (node) {
     console.log(node.value);
 });
 
+let numToBeFound = 9; // for use in testing tree.height and tree.depth
+
 tree.prettyPrintSelf();
-let numToBeFound = 4;
 console.log("height of " + numToBeFound + " = " 
     + tree.height(tree.find(numToBeFound)));
+
+console.log("depth of " + numToBeFound + " = " 
+    + tree.depth(tree.find(numToBeFound)));
