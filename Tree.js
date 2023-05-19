@@ -1,4 +1,5 @@
 import Node from "./Node.js";
+import ArrayQueue from "./ArrayQueue.js";
 
 export default class Tree {
     constructor(value) {
@@ -133,6 +134,45 @@ export default class Tree {
         return this.searchRec(root.left, key);
     }
 
+    levelOrder(func) {
+        if (func === undefined) {
+            let array = []
+            let queue = new ArrayQueue();
+            queue.enqueue(this.root);
+            while (!queue.isEmpty()) {
+                let current = queue.getFront();
+                array.push(current.value);
+                if (current.left !== null) {
+                    queue.enqueue(current.left);
+                }
+                if (current.right !== null) {
+                    queue.enqueue(current.right);
+                }
+                queue.dequeue();
+            }
+            return array;
+        }
+
+        if (typeof func !== "function") {
+            console.error("levelOrder: passed parameter func must be a function");
+            return;
+        }
+
+        let queue = new ArrayQueue();
+        queue.enqueue(this.root);
+        while (!queue.isEmpty()) {
+            let current = queue.getFront();
+            func(current);
+            if (current.left !== null) {
+                queue.enqueue(current.left);
+            }
+            if (current.right !== null) {
+                queue.enqueue(current.right);
+            }
+            queue.dequeue();
+        }
+    }
+    
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
