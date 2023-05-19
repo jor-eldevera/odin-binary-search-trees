@@ -8,3 +8,8 @@ tree.insert(7);
 tree.insert(6);
 tree.insert(9);
 tree.prettyPrintSelf();
+
+tree.delete(8);
+tree.prettyPrintSelf();
+
+console.log(tree.find(4));
