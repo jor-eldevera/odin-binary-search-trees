@@ -41,3 +41,8 @@ console.log(tree.postOrder());
 tree.postOrder(function (node) {
     console.log(node.value);
 });
+
+tree.prettyPrintSelf();
+let numToBeFound = 4;
+console.log("height of " + numToBeFound + " = " 
+    + tree.height(tree.find(numToBeFound)));
