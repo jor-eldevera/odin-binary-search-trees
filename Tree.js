@@ -208,6 +208,76 @@ export default class Tree {
         this.inOrderWithFunction(node.right, func);
     }
 
+    preOrder(func) {
+        if (func === undefined) {
+            let array = [];
+            this.preOrderWithArray(this.root, array);
+            return array;
+        }
+
+        if (typeof func !== "function") {
+            console.error("preOrder: passed parameter func must be a function");
+            return;
+        }
+
+        this.preOrderWithFunction(this.root, func);
+    }
+
+    preOrderWithArray(node, array) {
+        if (node === null) {
+            return;
+        }
+
+        array.push(node.value);
+        this.preOrderWithArray(node.left, array);
+        this.preOrderWithArray(node.right, array);
+    }
+    
+    preOrderWithFunction(node, func) {
+        if (node === null) {
+            return;
+        }
+
+        func(node);
+        this.preOrderWithFunction(node.left, func);
+        this.preOrderWithFunction(node.right, func);
+    }
+
+    postOrder(func) {
+        if (func === undefined) {
+            let array = [];
+            this.postOrderWithArray(this.root, array);
+            return array;
+        }
+
+        if (typeof func !== "function") {
+            console.error("postOrder: passed parameter func must be a function");
+            return;
+        }
+
+        this.postOrderWithFunction(this.root, func);
+    }
+
+    postOrderWithArray(node, array) {
+        if (node === null) {
+            return;
+        }
+
+        this.postOrderWithArray(node.left, array);
+        this.postOrderWithArray(node.right, array);
+        array.push(node.value);
+    }
+    
+    postOrderWithFunction(node, func) {
+        if (node === null) {
+            return;
+        }
+
+        this.postOrderWithFunction(node.left, func);
+        this.postOrderWithFunction(node.right, func);
+        func(node);
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
