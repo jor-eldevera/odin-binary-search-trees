@@ -59,7 +59,6 @@ export default class Tree {
         }
         
         /* Otherwise, recur down the tree */
-        console.log("key: " + key + " root.key: " + root.value);
         if (key < root.value) {
             root.left = this.insertRec(root.left, key);
         } else if (key > root.value) {
@@ -68,6 +67,70 @@ export default class Tree {
  
         /* return the (unchanged) node pointer */
         return root;
+    }
+
+    delete(key) {
+        this.root = this.deleteRec(this.root, key);
+    }
+
+    deleteRec(root, key) {
+        /* Base Case: If the tree is empty */
+        if (root == null)
+            return root;
+  
+        /* Otherwise, recur down the tree */
+        if (key < root.value)
+            root.left = this.deleteRec(root.left, key);
+        else if (key > root.value)
+            root.right = this.deleteRec(root.right, key);
+  
+        // if key is same as root's
+        // key, then This is the
+        // node to be deleted
+        else {
+            // node with only one child or no child
+            if (root.left == null)
+                return root.right;
+            else if (root.right == null)
+                return root.left;
+  
+            // node with two children: Get the inorder
+            // successor (smallest in the right subtree)
+            root.value = this.minValue(root.right);
+  
+            // Delete the inorder successor
+            root.right = this.deleteRec(root.right, root.value);
+        }
+  
+        return root;
+    }
+
+    minValue(root) {
+        let minv = root.value;
+        while (root.left != null)
+        {
+            minv = root.left.value;
+            root = root.left;
+        }
+        return minv;
+    }
+
+    find(key) {
+        return this.searchRec(this.root, key);
+    }
+
+    searchRec(root, key) {
+        // Base Cases: root is null
+        // or key is present at root
+        if (root == null || root.value == key)
+            return root;
+ 
+        // Key is greater than root's key
+        if (root.value < key)
+           return this.searchRec(root.right, key);
+ 
+        // Key is smaller than root's key
+        return this.searchRec(root.left, key);
     }
 
     prettyPrint(node, prefix = "", isLeft = true) {
