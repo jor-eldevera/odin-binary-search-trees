@@ -278,6 +278,20 @@ export default class Tree {
         func(node);
     }
 
+    height(node) {
+        if (node === null) {
+            return -1;
+        }
+        let left = this.height(node.left);
+        let right = this.height(node.right);
+
+        if (left > right) {
+            return left + 1;
+        } else {
+            return right + 1;
+        }
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
