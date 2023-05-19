@@ -18,3 +18,8 @@ console.log(tree.levelOrder());
 tree.levelOrder(function (node) {
     console.log(node.value);
 });
+
+console.log(tree.inOrder());
+tree.inOrder(function (node) {
+    console.log(node.value);
+})
