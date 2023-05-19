@@ -21,7 +21,6 @@ export default class Tree {
 
         // call sortedArrayToBST
         this.root = this.sortedArrayToBST(noDuplicates, 0, noDuplicates.length - 1)
-        this.prettyPrint(this.sortedArrayToBST(noDuplicates, 0, noDuplicates.length - 1));
     }
 
     sortedArrayToBST(array, start, end) {
@@ -173,6 +172,11 @@ export default class Tree {
         }
     }
 
+    /**
+     * Traverses the tree in inorder fashion
+     * @param {Function} func 
+     * @returns an array if func is not provided
+     */
     inOrder(func) {
         if (func === undefined) {
             let array = [];
@@ -320,6 +324,14 @@ export default class Tree {
             return dist + 1;
             
         return dist;
+    }
+
+    rebalance() {
+        // Make the tree into an array
+        let array = this.inOrder();
+
+        // Send it to buildTree()
+        this.buildTree(array);
     }
 
     prettyPrint(node, prefix = "", isLeft = true) {
