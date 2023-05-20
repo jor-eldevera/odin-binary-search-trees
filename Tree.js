@@ -326,6 +326,31 @@ export default class Tree {
         return dist;
     }
 
+    isBalanced() {
+        if (this.isBalancedRec(this.root) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isBalancedRec(root) {
+        if (root == null)
+                return 0;
+            let lh = this.isBalancedRec(root.left);
+            if (lh == -1)
+                return -1;
+            let rh = this.isBalancedRec(root.right);
+            if (rh == -1)
+                return -1;
+    
+            if (Math.abs(lh - rh) > 1) {
+                return -1;
+            } else {
+                return Math.max(lh, rh) + 1;
+            }
+    }
+
     rebalance() {
         // Make the tree into an array
         let array = this.inOrder();
