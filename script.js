@@ -51,5 +51,9 @@ console.log("height of " + numToBeFound + " = "
 console.log("depth of " + numToBeFound + " = " 
     + tree.depth(tree.find(numToBeFound)));
 
+console.log("prebalancing: " + tree.isBalanced());
+
 tree.rebalance();
 tree.prettyPrintSelf();
+
+console.log("postbalancing: " + tree.isBalanced());
